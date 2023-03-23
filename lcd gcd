@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of integers: ");
+        int n = scanner.nextInt();
+        int[] numbers = new int[n];
+        System.out.println("Enter the " + n + " integers: ");
+        for (int i = 0; i < n; i++) {
+            numbers[i] = scanner.nextInt();
+        }
+        int lcm = getLCM(numbers);
+        int gcd = getGCD(numbers);
+        System.out.println("The LCM is: " + lcm);
+        System.out.println("The GCD is: " + gcd);
+    }
+
+    public static int getLCM(int[] numbers) {
+        int lcm = numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            lcm = (lcm * numbers[i]) / getGCD(lcm, numbers[i]);
+        }
+        return lcm;
+    }
+
+    public static int getGCD(int[] numbers) {
+        int gcd = numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            gcd = getGCD(gcd, numbers[i]);
+        }
+        return gcd;
+    }
+
+    public static int getGCD(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return getGCD(b, a % b);
+    }
+}
